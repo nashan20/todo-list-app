@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Background */
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    padding: 10px;
+}
+
+/* Todo App Card */
+
+.todo-app{
+   width: 100%; 
+   max-width: 540px;
+   background: #fff;
+   margin: 50px auto 20px;
+   padding: 40px 30px 70px;
+   border-radius: 10px;
+}
+
+/* Title */
+
+.todo-app h2{
+   color: #002765; 
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+.todo-app h2 img{
+    width: 30px;
+    margin-left: 10px;
+}
+
+/* Input Row */
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #edeef0;
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-right: 5px;
+    margin-bottom: 25px;
+}
+
+/* Input Box */
+
+input{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 12px 15px;
+    font-size: 16px;
+}
+
+/* Add Button */
+
+button{
+    border: none;
+    outline: none;
+    padding: 14px 35px;
+    background: #ff5945;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+/* Task List */
+
+ul li{
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 10px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Circle Icon */
+
+ul li::before{
+    content:'';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-image: url(images/circle.jpg);
+    background-size: cover;
+    background-position: center;
+    top: 12px;
+    left: 8px;
+}
+
+/* Completed Task */
+
+ul li.checked{
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before{
+    background-image: url(images/rightmark.png);
+}
+
+/* Task Buttons Container */
+
+.task-buttons{
+    display: flex;
+    gap: 8px;
+}
+
+/* Edit Button */
+
+.edit-btn{
+    background: #ffc107;
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Delete Button */
+
+.delete-btn{
+    background: #dc3545;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+}
