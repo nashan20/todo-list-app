@@ -3,7 +3,8 @@ const listContainer = document.getElementById("list-container");
 
 function addTask() {
 
-    let text = inputBox.Value;
+    let text = inputBox.value;
+    inputBox.value = "";
 
     if(text === "") {
         alert("Write something first!");
@@ -23,11 +24,13 @@ function addTask() {
     let deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
     deleteBtn.classList.add("delete-btn");
+   
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
 
     listContainer.appendChild(li);
 
-    inputBox.Value = "";
+    inputBox.value = "";
 
     saveData();
 }
@@ -39,8 +42,9 @@ listContainer.addEventListener("click", function (e) {
 
     
     if (e.target.classList.contains("delete-btn")) {
-        li.remove();
-    }
+    li.remove();
+    saveData();
+}
 
     
     if (e.target.classList.contains("edit-btn")) {
@@ -50,6 +54,7 @@ listContainer.addEventListener("click", function (e) {
 
         if (updated) {
             span.innerText = updated;
+            saveData();
         }
     }
 
