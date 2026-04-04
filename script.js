@@ -34,31 +34,39 @@ function addTask() {
 
 listContainer.addEventListener("click", function (e) {
 
-    let li = e.target.closest("li");
+    let li = e.target.parentElement;
 
-    if (!li) return;
 
+    
     if (e.target.classList.contains("delete-btn")) {
         li.remove();
-        saveData();
     }
 
-    else if (e.target.classList.contains("edit-btn")) {
+    
+    if (e.target.classList.contains("edit-btn")) {
 
         let span = li.querySelector("span");
         let updated = prompt("Edit task", span.innerText);
 
-        if (updated !== null && updated !== "") {
+        if (updated) {
             span.innerText = updated;
-            saveData();
         }
     }
 
-    else {
+
+    if(!e.target.classList.contains("edit-btn") &&
+    !e.target.classList.contains("delete-btn")) {
+
+    let li = e.target.closest("li");
+
+    if(li) {
         li.classList.toggle("checked");
         saveData();
     }
+}
+
 });
+
 
 function saveData() {
 
