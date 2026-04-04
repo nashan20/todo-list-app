@@ -68,7 +68,25 @@ listContainer.addEventListener("click", function (e) {
 });
 
 
+function saveData() {
 
+    let allTasks = [];
+
+    let items = listContainer.querySelectorAll("li");
+
+    items.forEach(function (li) {
+
+        let text = li.querySelector("span").innerText;
+        let done = li.classList.contains("checked");
+
+        allTasks.push({
+            text: text,
+            done: done
+        });
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+}
 
 function loadTasks() {
 
@@ -102,7 +120,6 @@ function loadTasks() {
         li.appendChild(deleteBtn);
 
         listContainer.appendChild(li);
-
     });
 }
 
