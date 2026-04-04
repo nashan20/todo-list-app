@@ -1,20 +1,12 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-}
-
-/* Background */
 
 .container{
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, #153677, #4e085f);
+    background: rgb(79, 87, 96);
     padding: 10px;
 }
 
-/* Todo App Card */
+
 
 .todo-app{
    width: 100%; 
@@ -39,7 +31,6 @@
     margin-left: 10px;
 }
 
-/* Input Row */
 
 .row{
     display: flex;
@@ -52,7 +43,6 @@
     margin-bottom: 25px;
 }
 
-/* Input Box */
 
 input{
     flex: 1;
@@ -63,20 +53,18 @@ input{
     font-size: 16px;
 }
 
-/* Add Button */
 
 button{
     border: none;
     outline: none;
     padding: 14px 35px;
-    background: #ff5945;
+    background: #373639;
     color: #fff;
     font-size: 15px;
     cursor: pointer;
     border-radius: 40px;
 }
 
-/* Task List */
 
 ul li{
     list-style: none;
@@ -88,10 +76,14 @@ ul li{
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 20px;
 }
 
-/* Circle Icon */
+ul li span {
+    flex:1;
+    word-break: break-word;
+}
+
 
 ul li::before{
     content:'';
@@ -104,11 +96,11 @@ ul li::before{
     background-position: center;
     top: 12px;
     left: 8px;
+    cursor: pointer;
 }
 
-/* Completed Task */
 
-ul li.checked{
+ul li.checked span{
     color: #555;
     text-decoration: line-through;
 }
@@ -117,14 +109,12 @@ ul li.checked::before{
     background-image: url(images/rightmark.png);
 }
 
-/* Task Buttons Container */
 
 .task-buttons{
     display: flex;
     gap: 8px;
 }
 
-/* Edit Button */
 
 .edit-btn{
     background: #ffc107;
@@ -135,7 +125,6 @@ ul li.checked::before{
     cursor: pointer;
 }
 
-/* Delete Button */
 
 .delete-btn{
     background: #dc3545;

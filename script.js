@@ -1,99 +1,98 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
-function addTask(){
+function addTask() {
 
-    if(inputBox.value === ""){
-        alert("You must write something!");
+    let text = inputBox.Value;
+
+    if(text === "") {
+        alert("Write something first!");
         return;
     }
 
     let li = document.createElement("li");
 
     let span = document.createElement("span");
-    span.innerText = inputBox.value;
-
+    span.innerText = text;
     li.appendChild(span);
 
-    // Edit button
     let editBtn = document.createElement("button");
     editBtn.innerText = "Edit";
-    editBtn.className = "edit-btn";
+    editBtn.classList.add("edit-btn");
 
-    // Delete button
     let deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
-    deleteBtn.className = "delete-btn";
-
-    li.appendChild(editBtn);
+    deleteBtn.classList.add("delete-btn");
     li.appendChild(deleteBtn);
 
     listContainer.appendChild(li);
 
-    inputBox.value = "";
+    inputBox.Value = "";
 
     saveData();
 }
 
+listContainer.addEventListener("click", function (e) {
 
-listContainer.addEventListener("click", function(e){
+    let li = e.target.closest("li");
 
-    if(e.target.tagName === "SPAN"){
-        e.target.parentElement.classList.toggle("checked");
+    if (!li) return;
+
+    if (e.target.classList.contains("delete-btn")) {
+        li.remove();
         saveData();
     }
 
-    else if(e.target.classList.contains("delete-btn")){
-        e.target.parentElement.remove();
-        saveData();
-    }
+    else if (e.target.classList.contains("edit-btn")) {
 
-    else if(e.target.classList.contains("edit-btn")){
-        let span = e.target.parentElement.querySelector("span");
+        let span = li.querySelector("span");
+        let updated = prompt("Edit task", span.innerText);
 
-        let newText = prompt("Edit task:", span.innerText);
-
-        if(newText !== null && newText !== ""){
-            span.innerText = newText;
+        if (updated !== null && updated !== "") {
+            span.innerText = updated;
             saveData();
         }
     }
 
+    else {
+        li.classList.toggle("checked");
+        saveData();
+    }
 });
 
+function saveData() {
 
+    let allTasks = [];
 
-function saveData(){
+    let items = listContainer.querySelectorAll("li");
 
-    let tasks = [];
-
-    document.querySelectorAll("#list-container li").forEach(li => {
+    items.forEach(function (li) {
 
         let text = li.querySelector("span").innerText;
-        let completed = li.classList.contains("checked");
+        let done = li.classList.contains("checked");
 
-        tasks.push({
+        allTasks.push({
             text: text,
-            completed: completed
+            done: done
         });
-
     });
 
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
 
+function loadTasks() {
 
-function showTask(){
+    let data = localStorage.getItem("tasks");
 
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    if (!data) return;
 
-    listContainer.innerHTML = "";
+    let tasks = JSON.parse(data);
 
-    tasks.forEach(task => {
+    tasks.forEach(function (task) {
 
         let li = document.createElement("li");
 
-        if(task.completed){
+        if (task.done) {
             li.classList.add("checked");
         }
 
@@ -102,11 +101,11 @@ function showTask(){
 
         let editBtn = document.createElement("button");
         editBtn.innerText = "Edit";
-        editBtn.className = "edit-btn";
+        editBtn.classList.add("edit-btn");
 
         let deleteBtn = document.createElement("button");
         deleteBtn.innerText = "Delete";
-        deleteBtn.className = "delete-btn";
+        deleteBtn.classList.add("delete-btn");
 
         li.appendChild(span);
         li.appendChild(editBtn);
@@ -115,8 +114,6 @@ function showTask(){
         listContainer.appendChild(li);
 
     });
-
 }
 
-showTask();
-
+loadTasks();
