@@ -1,23 +1,13 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
-function addTask() {
-
-    let text = inputBox.value;
-    
-
-    if(text === "") {
-        alert("Write something first!");
-        return;
-    }
-
-    inputBox.value = "";
-
+function createTaskElement(taskText, isDone = false) {
     let li = document.createElement("li");
 
+    if (isDone) li.classList.add("checked");
+
     let span = document.createElement("span");
-    span.innerText = text;
-    li.appendChild(span);
+    span.innerText = taskText;
 
     let editBtn = document.createElement("button");
     editBtn.innerText = "Edit";
@@ -26,14 +16,12 @@ function addTask() {
     let deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
     deleteBtn.classList.add("delete-btn");
-   
+
+    li.appendChild(span);
     li.appendChild(editBtn);
     li.appendChild(deleteBtn);
 
-    listContainer.appendChild(li);
-
-
-    saveData();
+    return li;
 }
 
     listContainer.addEventListener("click", function (e) {
@@ -96,36 +84,15 @@ function saveData() {
 function loadTasks() {
 
     let data = localStorage.getItem("tasks");
-
-    if (!data) return;
+    if (!data) {
+    console.log("No tasks found");
+    return;
+}
 
     let tasks = JSON.parse(data);
 
     tasks.forEach(function (task) {
-
-        let li = document.createElement("li");
-
-        if (task.done) {
-            li.classList.add("checked");
-        }
-
-        let span = document.createElement("span");
-        span.innerText = task.text;
-
-        let editBtn = document.createElement("button");
-        editBtn.innerText = "Edit";
-        editBtn.classList.add("edit-btn");
-
-        let deleteBtn = document.createElement("button");
-        deleteBtn.innerText = "Delete";
-        deleteBtn.classList.add("delete-btn");
-
-        li.appendChild(span);
-        li.appendChild(editBtn);
-        li.appendChild(deleteBtn);
-
+        let li = createTaskElement(task.text, task.done);
         listContainer.appendChild(li);
     });
 }
-
-loadTasks();
