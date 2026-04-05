@@ -114,3 +114,5 @@ function loadTasks() {
         listContainer.appendChild(li);
     });
 }
+
+loadTasks();
