@@ -4,12 +4,14 @@ const listContainer = document.getElementById("list-container");
 function addTask() {
 
     let text = inputBox.value;
-    inputBox.value = "";
+    
 
     if(text === "") {
         alert("Write something first!");
         return;
     }
+
+    inputBox.value = "";
 
     let li = document.createElement("li");
 
@@ -30,32 +32,30 @@ function addTask() {
 
     listContainer.appendChild(li);
 
-    inputBox.value = "";
 
     saveData();
 }
 
-listContainer.addEventListener("click", function (e) {
+    listContainer.addEventListener("click", function (e) {
 
-    let li = e.target.parentElement;
+    let li = e.target.closest("li");
+    if (!li) return;
 
-
-    
     if (e.target.classList.contains("delete-btn")) {
-    li.remove();
-    saveData();
-}
+        li.remove();
+        saveData();
+        return;
+    }
 
-    
     if (e.target.classList.contains("edit-btn")) {
-
         let span = li.querySelector("span");
         let updated = prompt("Edit task", span.innerText);
 
-        if (updated) {
+        if (updated !== null && updated.trim() !== "") {
             span.innerText = updated;
             saveData();
         }
+        return;
     }
 
 
