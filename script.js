@@ -24,6 +24,24 @@ function createTaskElement(taskText, isDone = false) {
     return li;
 }
 
+function addTask() {
+
+    let text = inputBox.value;
+
+    if (text === "") {
+        alert("Write something first!");
+        return;
+    }
+
+    let li = createTaskElement(text);
+    listContainer.appendChild(li);
+
+    inputBox.value = "";
+    inputBox.focus();
+
+    saveData();
+}
+
     listContainer.addEventListener("click", function (e) {
 
     let li = e.target.closest("li");
